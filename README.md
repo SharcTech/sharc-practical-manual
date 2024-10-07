@@ -13,6 +13,8 @@ This manual will teach you how to:
 
 Industrial sensors can be divided into discrete and analog. A discrete sensor can have two states, on or off.  An analog sensor value is represented across a range of values, such as one volt, one and a half volts, two volts, and so on.  Industrial sensors are powered with 24 volts DC typically have a M12 barrel connector where pin 1 is positive, pin 3 is negative or ground, and pin 4 is the signal.  In a case where a sensor supports multiple types of outputs, pin 2 is used for the secondary signal.  An example of this is a discrete sensor that can be configured as a PNP or NPN circuit.  Another example is an analog sensor where the secondary signal is an alarm when some measurement threshold is crossed.
 
+sensors.png
+
 The SHARC supports four different sensor types:
 * discrete PNP
 * discrete NPN
@@ -56,3 +58,37 @@ Open your Chrome browser and navigate to https://sharc.tech.  From there select 
 ### Sensor Configuration
 
 ### Live Sensor Data
+
+## MQTT Transmission
+
+MQTT is a popular communication protocol across Industry 4.0.  It is light weight and offers a publish and subscribe mechanism well suited for reporting data by exception.  A server or MQTT broker is required as the centerpiece of the deployment.  Each SHARC is an MQTT client to the broker.  The SHARC subscribes to specific topics as channels to configure and interface with the SHARC.  The SHARC also publishes its data to specific topics as channels to get the data out of the device.
+
+### Install an MQTT Broker
+
+We will install the open-source Mosquitto broker on our Windows machine.  Download and install Mosquitto broker from https://mosquitto.org/files/binary/win64/mosquitto-2.0.19-install-windows-x64.exe.  The broker will install itself as a Windows Service.
+
+mosquitto_service.png
+
+Next, configure the Windows Firewall to allow inbound traffic on TCP port 1883.
+
+firewall_inbound_rule.png
+
+Finally, modify the broker configuration to allow anonymous connections external to your computer.  Then restart the Mosquitto service.
+
+mosquitto_conf_allow_anon.png
+
+mosquitto_conf_listener.png
+
+mosquitto_service_restart.png
+
+Find your computer’s IP address and test the connection using MQTT Explorer, found here: https://github.com/thomasnordquist/MQTT-Explorer/releases/download/v0.4.0-beta.6/MQTT-Explorer-Setup-0.4.0-beta.6.exe.
+
+ipconfig.png
+
+mqtt_explorer_test.png
+
+mqtt_explorer_test_connected.png
+
+### Point SHARC to Our Broker
+
+### View SHARC Configuration and Sensor Readings
