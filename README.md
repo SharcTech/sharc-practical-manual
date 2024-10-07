@@ -13,7 +13,7 @@ This manual will teach you how to:
 
 Industrial sensors can be divided into discrete and analog. A discrete sensor can have two states, on or off.  An analog sensor value is represented across a range of values, such as one volt, one and a half volts, two volts, and so on.  Industrial sensors are powered with 24 volts DC typically have a M12 barrel connector where pin 1 is positive, pin 3 is negative or ground, and pin 4 is the signal.  In a case where a sensor supports multiple types of outputs, pin 2 is used for the secondary signal.  An example of this is a discrete sensor that can be configured as a PNP or NPN circuit.  Another example is an analog sensor where the secondary signal is an alarm when some measurement threshold is crossed.
 
-sensors.png
+![sensor types](./images/sensors.png)
 
 The SHARC supports four different sensor types:
 * discrete PNP
