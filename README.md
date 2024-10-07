@@ -2,6 +2,8 @@
 
 The SHARC universal IoT sensor adapter is the quickest method of capturing industrial sensor observations.  With JSON and MQTT native output, the SHARC is ready to transmit data to any networked application within minutes.
 
+![SHARC](./images/sharc1.png)
+
 This manual will teach you how to:
 * select an industrial sensor
 * configure your SHARC
@@ -9,9 +11,16 @@ This manual will teach you how to:
 * transmit sensor data to a MQTT server
 * interact with the SHARC over MQTT
 
+## Get Familiar with the SHARC
+
+Become familiar with your SHARC by reading the data sheet and setup instructions.
+
+1. [Data Sheet](https://www.mriiot.com/s/SHARC-Data-Sheet-Latest.pdf)  (https://www.mriiot.com/s/SHARC-Data-Sheet-Latest.pdf)
+2. [Setup Instructions](https://www.mriiot.com/s/SHARC-Setup-Instructions.pdf)  (https://www.mriiot.com/s/SHARC-Setup-Instructions.pdf)
+
 ## Sensor Selection
 
-Industrial sensors can be divided into discrete and analog. A discrete sensor can have two states, on or off.  An analog sensor value is represented across a range of values, such as one volt, one and a half volts, two volts, and so on.  Industrial sensors are powered with 24 volts DC typically have a M12 barrel connector where pin 1 is positive, pin 3 is negative or ground, and pin 4 is the signal.  In a case where a sensor supports multiple types of outputs, pin 2 is used for the secondary signal.  An example of this is a discrete sensor that can be configured as a PNP or NPN circuit.  Another example is an analog sensor where the secondary signal is an alarm when some measurement threshold is crossed.
+Industrial sensors can be divided into two types, discrete and analog. A discrete sensor can have two states, on or off.  An analog sensor value is represented across a range of values, such as one volt, one and a half volts, two volts, and so on.  Industrial sensors are powered with 24 volts DC.  They typically have a M12 barrel connector where pin 1 is positive, pin 3 is negative or ground, and pin 4 is the signal.  In a case where a sensor supports multiple types of outputs, pin 2 is used for the secondary signal.  An example of this is a discrete sensor that can be configured as a PNP or NPN circuit.  Another example is an analog sensor where the secondary signal is an alarm when some measurement threshold is crossed.
 
 ![sensor types](./images/sensors.png)
 
@@ -67,27 +76,27 @@ MQTT is a popular communication protocol across Industry 4.0.  It is light weigh
 
 We will install the open-source Mosquitto broker on our Windows machine.  Download and install Mosquitto broker from https://mosquitto.org/files/binary/win64/mosquitto-2.0.19-install-windows-x64.exe.  The broker will install itself as a Windows Service.
 
-mosquitto_service.png
+![Mosquitto service](./images/mosquitto_service.png)
 
 Next, configure the Windows Firewall to allow inbound traffic on TCP port 1883.
 
-firewall_inbound_rule.png
+![inbound firewall rule](./images/firewall_inbound_rule.png)
 
 Finally, modify the broker configuration to allow anonymous connections external to your computer.  Then restart the Mosquitto service.
 
-mosquitto_conf_allow_anon.png
+![allow anonymous connections](./images/mosquitto_conf_allow_anon.png)
 
-mosquitto_conf_listener.png
+![allow external connections](./images/mosquitto_conf_listener.png)
 
-mosquitto_service_restart.png
+![restart service](./images/mosquitto_service_restart.png)
 
 Find your computer’s IP address and test the connection using MQTT Explorer, found here: https://github.com/thomasnordquist/MQTT-Explorer/releases/download/v0.4.0-beta.6/MQTT-Explorer-Setup-0.4.0-beta.6.exe.
 
-ipconfig.png
+![ipconfig](./images/ipconfig.png)
 
-mqtt_explorer_test.png
+![MQTT Explorer connection](./images/mqtt_explorer_test.png)
 
-mqtt_explorer_test_connected.png
+![MQTT Explorer connected](./images/mqtt_explorer_test_connected.png)
 
 ### Point SHARC to Our Broker
 
