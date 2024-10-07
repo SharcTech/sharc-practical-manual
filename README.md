@@ -50,23 +50,59 @@ Other important process variables might include temperature or air and hydraulic
 
 ## SHARC Configuration
 
-You can think of the SHARC as an adapter, just like the ones you might use at home to convert a USB to an HDMI signal.  The M12 barrel connector of the SHARC accepts an industrial sensor.  The  RJ35 network connector of the SHARC provides network communications to both configure the device and retrieve sensor  readings.  The four position rotary switch determines which sensor circuit is active.  If you are connecting a PNP sensor, set the rotary switch to position zero.  If you are connecting a 4-20mA sensor, set the rotary switch to position three.
+You can think of the SHARC as an adapter, just like the ones you might use at home to convert a USB to an HDMI signal.  The M12 barrel connector of the SHARC accepts an industrial sensor.  The  RJ45 network connector of the SHARC provides network communications to both configure the device and retrieve sensor  readings.  The four position rotary switch determines which sensor circuit is active.  If you are connecting a PNP sensor, set the rotary switch to position zero.  If you are connecting a 4-20mA sensor, set the rotary switch to position three.
 
-Both the SHARC and sensor require power.  There are two options for power delivery.  The first option is to use Power-over-Ethernet.  The second option is to use a Y-cable or T-adapter and provide power over the M12 barrel connector.  The second option is practical when WIFI wireless transmission is possible and 24VDC can be diverted from the machine’s power.
+Both the SHARC and sensor require power.  There are two options for power delivery.  The first option is to use Power-over-Ethernet.  
+
+![PoE](./images/sharc_ethernet.jpg)
+
+The second option is to use a Y-cable or T-adapter and provide power over the M12 barrel connector.  The second option is practical when WIFI wireless transmission is possible and 24VDC can be diverted from the machine’s power.
+
+![24VDC](./images/sharc_ycable_setup.jpg)
 
 Connect the sensor and SHARC together using the provided five pin M12 cable.  Pin four is always the signal wire.  Pins one and three are the power pins.  In some cases a field wireable connector must be used to provide the correct pin configuration.
 
-Plug the PoE network cable into the SHARC.  This will power on the SHARC and the sensor.  While booting, the LED light will remain yellow.  Once booted the light will change to red and green for MQTT network mode or cyan and blue for Bluetooth mode.  Let’s configure the SHARC using Bluetooth.  For this we will either use the SharcStudio iOS app or our Chrome browser on a computer with Bluetooth.  To get the SHARC into Bluetooth mode, hold down the user button until the device reboots, then release the button.  You are in Bluetooth mode when the LED turns cyan color.  You are now ready to establish a connection to the SHARC.
+![sensor cable](./images/sharc_sensor_cable.jpg)
+
+Plug the PoE network cable into the SHARC.  This will power on the SHARC and the sensor.  
+
+![ethernet cable](./images/sharc_ethernet.jpg)
+
+While booting, the LED light will remain yellow.  Once booted the light will change to red and green for MQTT network mode or cyan and blue for Bluetooth mode.  Let’s configure the SHARC using Bluetooth.  For this we will either use the SharcStudio iOS app or our Chrome browser on a computer with Bluetooth.  To get the SHARC into Bluetooth mode, hold down the user button until the device reboots, then release the button.  You are in Bluetooth mode when the LED turns cyan color.  You are now ready to establish a connection to the SHARC.
 
 Open your Chrome browser and navigate to https://sharc.tech.  From there select BLE and scan for devices.  Once your device is found, select Pair and wait for the browser to pull the device’s configuration.
 
+![Bluetooth pairing](./images/sharctech_ble_pair.jpg)
+
 ### Device Information
+
+The device information pane displays useful information such as the SHARC unique identifier and firmware version.
+
+![device info](./images/ss_device_info.jpg)
 
 ### Network Configuration
 
+The network configuration pane allows you to view the device IP information.  You can also set a static IP configuration or toggle between wired Ethernet and WiFi.
+
+![network config](./images/ss_network_info.jpg)
+
 ### Sensor Configuration
 
+The sensor configuration pane allows you to configure how each sensor input circuit behaves.  
+
+Discrete sensors can be an on/off boolean value, an incrementing counter, or an accumulator for fast moving signals.  Counter and accumulator can be triggered on the rising edge, falling edge, or both.  Accumulator period is the time interval at which accumulated sensor readings are published to the MQTT broker.
+
+![digital sensor config](./images/ss_sensor_digital_config.jpg)
+
+Analog sensors present a linear scaling configuration.  In the below example a reading of 4mA is equivalent to 0psi, where a reading of 20mA is equivalent to 175psi.  This configuration has been set based on the knowledge of the pressure transducer’s rated measurement range of 0 to 175 psi.
+
+![analog sensor config](./images/ss_sensor_analog_config.jpg)
+
 ### Live Sensor Data
+
+Below is a view of our PNP discrete sensor readings.  The PNP input has been configured as an incrementing counter.
+
+![live data](./images/ss_sensor_live.jpg)
 
 ## MQTT Transmission
 
